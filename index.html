@@ -1,0 +1,948 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Esporte & Cidadania Acre | Hub Comunitário 2027</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --acre-verde: #006b3f;
+        --acre-verde-escuro: #004d2c;
+        --acre-amarelo: #facc15;
+        --acre-vermelho: #dc2626;
+      }
+      body {
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background-color: #f3f6f4;
+      }
+      .bg-acre {
+        background-color: var(--acre-verde);
+      }
+      .bg-acre-dark {
+        background-color: var(--acre-verde-escuro);
+      }
+      .text-acre {
+        color: var(--acre-verde);
+      }
+      .border-acre {
+        border-color: var(--acre-verde);
+      }
+
+      @media print {
+        body * {
+          visibility: hidden;
+        }
+        #area-impressao,
+        #area-impressao * {
+          visibility: visible;
+        }
+        #area-impressao {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          background: white;
+          padding: 20px;
+        }
+        .no-print {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="text-slate-800 flex flex-col min-h-screen">
+    <!-- Faixa Superior Institucional -->
+    <div class="bg-acre-dark text-white text-xs py-1.5 px-4">
+      <div
+        class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-2"
+      >
+        <span
+          ><i class="fa-solid fa-star text-red-500 mr-1"></i> Portal de
+          Utilidade Pública • Rio Branco - Acre</span
+        >
+        <span>Projeto Esporte & Cidadania 2027</span>
+      </div>
+    </div>
+
+    <!-- Cabeçalho Principal -->
+    <header class="bg-acre text-white shadow-md">
+      <div
+        class="max-w-6xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4"
+      >
+        <div class="flex items-center gap-4">
+          <div
+            class="w-14 h-14 rounded-xl bg-yellow-400 text-green-950 flex items-center justify-center text-2xl font-black shadow"
+          >
+            <i class="fa-solid fa-futbol"></i>
+          </div>
+          <div>
+            <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">
+              Esporte & Cidadania Acre
+            </h1>
+            <p class="text-green-100 text-sm">
+              Hub de Escolinhas Sociais, Treinos Gratuitos e Torneios
+              Comunitários
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <button
+            onclick="mudarAba('escolinhas')"
+            class="bg-yellow-400 hover:bg-yellow-300 text-green-950 font-bold px-4 py-2 rounded-lg text-sm transition shadow"
+          >
+            <i class="fa-solid fa-magnifying-glass mr-1"></i> Buscar Treinos
+          </button>
+          <button
+            onclick="mudarAba('inscricao')"
+            class="bg-white/15 hover:bg-white/25 text-white font-semibold px-4 py-2 rounded-lg text-sm transition border border-white/30"
+          >
+            <i class="fa-solid fa-user-plus mr-1"></i> Inscrever Atleta
+          </button>
+        </div>
+      </div>
+
+      <!-- Navegação por Abas -->
+      <nav class="bg-acre-dark/60 border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-4 flex overflow-x-auto gap-1">
+          <button
+            id="tab-escolinhas"
+            onclick="mudarAba('escolinhas')"
+            class="aba-btn px-5 py-3 text-sm font-bold border-b-4 border-yellow-400 text-yellow-300 whitespace-nowrap"
+          >
+            <i class="fa-solid fa-map-location-dot mr-1.5"></i> Escolinhas &
+            Polos
+          </button>
+          <button
+            id="tab-inscricao"
+            onclick="mudarAba('inscricao')"
+            class="aba-btn px-5 py-3 text-sm font-semibold border-b-4 border-transparent text-green-100 hover:text-white whitespace-nowrap"
+          >
+            <i class="fa-solid fa-id-card mr-1.5"></i> Pré-Inscrição de Jovens
+          </button>
+          <button
+            id="tab-torneios"
+            onclick="mudarAba('torneios')"
+            class="aba-btn px-5 py-3 text-sm font-semibold border-b-4 border-transparent text-green-100 hover:text-white whitespace-nowrap"
+          >
+            <i class="fa-solid fa-trophy mr-1.5"></i> Torneios & Ficha de Equipe
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
+      <!-- ABA 1: ESCOLINHAS E POLOS -->
+      <section id="sec-escolinhas" class="space-y-6">
+        <!-- Indicadores Rápidos -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm border border-slate-200"
+          >
+            <p class="text-xs text-slate-500 uppercase font-bold">
+              Polos Ativos
+            </p>
+            <p class="text-2xl font-extrabold text-acre mt-1" id="stat-polos">
+              6
+            </p>
+            <p class="text-xs text-slate-400 mt-0.5">Bairros de Rio Branco</p>
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm border border-slate-200"
+          >
+            <p class="text-xs text-slate-500 uppercase font-bold">
+              Modalidades
+            </p>
+            <p class="text-2xl font-extrabold text-acre mt-1">4</p>
+            <p class="text-xs text-slate-400 mt-0.5">100% Gratuitas</p>
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm border border-slate-200"
+          >
+            <p class="text-xs text-slate-500 uppercase font-bold">
+              Faixa Etária
+            </p>
+            <p class="text-2xl font-extrabold text-acre mt-1">6 a 17</p>
+            <p class="text-xs text-slate-400 mt-0.5">
+              Anos (Categorias de Base)
+            </p>
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm border border-slate-200"
+          >
+            <p class="text-xs text-slate-500 uppercase font-bold">
+              Vagas Abertas
+            </p>
+            <p class="text-2xl font-extrabold text-emerald-600 mt-1">185</p>
+            <p class="text-xs text-slate-400 mt-0.5">Temporada 2027</p>
+          </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label
+                class="block text-xs font-bold text-slate-600 uppercase mb-1"
+                >Filtrar por Bairro / Polo</label
+              >
+              <select
+                id="filtro-bairro"
+                onchange="renderizarPolos()"
+                class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-green-700"
+              >
+                <option value="TODOS">Todos os Bairros</option>
+                <option value="Morada do Sol">
+                  Morada do Sol / Jardim São Francisco
+                </option>
+                <option value="Tucumã">Tucumã</option>
+                <option value="Vila Ivonete">
+                  Vila Ivonete / Horto Florestal
+                </option>
+                <option value="Ipase">Ipase / Centro</option>
+                <option value="Cidade Nova">
+                  Cidade Nova / Segundo Distrito
+                </option>
+              </select>
+            </div>
+            <div>
+              <label
+                class="block text-xs font-bold text-slate-600 uppercase mb-1"
+                >Modalidade Esportiva</label
+              >
+              <select
+                id="filtro-modalidade"
+                onchange="renderizarPolos()"
+                class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-green-700"
+              >
+                <option value="TODAS">Todas as Modalidades</option>
+                <option value="Futebol de Campo">Futebol de Campo</option>
+                <option value="Futsal">Futsal</option>
+                <option value="Vôlei">Vôlei</option>
+                <option value="Atletismo">Atletismo / Corrida</option>
+              </select>
+            </div>
+            <div>
+              <label
+                class="block text-xs font-bold text-slate-600 uppercase mb-1"
+                >Buscar por Nome ou Projeto</label
+              >
+              <input
+                type="text"
+                id="filtro-texto"
+                onkeyup="renderizarPolos()"
+                placeholder="Ex: Recriança, Sub-13, Sábado..."
+                class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-green-700"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Grade de Polos -->
+        <div
+          id="lista-polos"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+        ></div>
+      </section>
+
+      <!-- ABA 2: PRÉ-INSCRIÇÃO DE ATLETAS -->
+      <section id="sec-inscricao" class="hidden max-w-3xl mx-auto">
+        <div
+          class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
+        >
+          <div class="bg-acre text-white px-6 py-4">
+            <h2 class="text-lg font-bold">
+              <i class="fa-solid fa-file-signature mr-2"></i>Ficha de
+              Pré-Inscrição nas Escolinhas (2027)
+            </h2>
+            <p class="text-xs text-green-100 mt-0.5">
+              Preencha os dados do jovem atleta para reservar a vaga e gerar o
+              comprovante de apresentação.
+            </p>
+          </div>
+
+          <form
+            id="form-atleta"
+            onsubmit="gerarComprovanteAtleta(event)"
+            class="p-6 space-y-4"
+          >
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1"
+                  >Nome Completo do(a) Atleta *</label
+                >
+                <input
+                  type="text"
+                  id="atleta-nome"
+                  required
+                  placeholder="Ex: João Pedro da Silva"
+                  class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
+                />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1"
+                  >Data de Nascimento *</label
+                >
+                <input
+                  type="date"
+                  id="atleta-nascimento"
+                  required
+                  class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1"
+                  >Polo / Escolinha Desejada *</label
+                >
+                <select
+                  id="atleta-polo"
+                  required
+                  class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
+                >
+                  <option value="Arena Recriança - Morada do Sol">
+                    Arena Recriança (Morada do Sol)
+                  </option>
+                  <option value="Núcleo Esportivo Tucumã">
+                    Núcleo Esportivo Tucumã
+                  </option>
+                  <option value="Projeto Atletismo Horto Florestal">
+                    Projeto Atletismo Horto Florestal
+                  </option>
+                  <option value="Escolinha Campo do Botafogo">
+                    Escolinha Campo do Botafogo
+                  </option>
+                  <option value="Quadra Comunitária Cidade Nova">
+                    Quadra Comunitária Cidade Nova
+                  </option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1"
+                  >Modalidade *</label
+                >
+                <select
+                  id="atleta-modalidade"
+                  required
+                  class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
+                >
+                  <option value="Futebol de Campo">Futebol de Campo</option>
+                  <option value="Futsal">Futsal</option>
+                  <option value="Vôlei">Vôlei</option>
+                  <option value="Atletismo">Atletismo / Corrida</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1"
+                  >Nome do Pai, Mãe ou Responsável *</label
+                >
+                <input
+                  type="text"
+                  id="resp-nome"
+                  required
+                  placeholder="Nome completo do responsável"
+                  class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
+                />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1"
+                  >WhatsApp do Responsável *</label
+                >
+                <input
+                  type="tel"
+                  id="resp-whats"
+                  required
+                  placeholder="(68) 99999-0000"
+                  class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1"
+                  >Escola onde estuda *</label
+                >
+                <input
+                  type="text"
+                  id="atleta-escola"
+                  required
+                  placeholder="Nome da escola municipal/estadual"
+                  class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
+                />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1"
+                  >Turno Escolar *</label
+                >
+                <select
+                  id="atleta-turno"
+                  required
+                  class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
+                >
+                  <option value="Manhã (Treino à tarde)">
+                    Estuda de Manhã (Treinar à tarde)
+                  </option>
+                  <option value="Tarde (Treino pela manhã)">
+                    Estuda à Tarde (Treinar pela manhã)
+                  </option>
+                  <option value="Integral (Treino aos sábados)">
+                    Tempo Integral (Treinar aos sábados)
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div
+              class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-amber-900"
+            >
+              <i class="fa-solid fa-circle-info mr-1"></i>
+              <strong>Importante:</strong> A permanência no projeto gratuito
+              exige frequência escolar regular e apresentação de documento com
+              foto do responsável no primeiro dia de treino.
+            </div>
+
+            <div class="pt-2 flex flex-wrap gap-3">
+              <button
+                type="submit"
+                class="bg-acre hover:bg-acre-dark text-white font-bold px-6 py-2.5 rounded-lg text-sm transition shadow"
+              >
+                <i class="fa-solid fa-check mr-1.5"></i> Gerar Comprovante de
+                Pré-Inscrição
+              </button>
+              <button
+                type="reset"
+                class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-4 py-2.5 rounded-lg text-sm transition"
+              >
+                Limpar Campos
+              </button>
+            </div>
+          </form>
+
+          <!-- Comprovante Gerado -->
+          <div
+            id="resultado-comprovante"
+            class="hidden border-t border-slate-200 p-6 bg-slate-50"
+          >
+            <div
+              id="area-impressao"
+              class="bg-white border-2 border-green-800 rounded-xl p-6 max-w-xl mx-auto"
+            >
+              <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <div>
+                  <p class="text-xs font-bold text-green-800 uppercase">
+                    Programa Esporte & Cidadania Acre • 2027
+                  </p>
+                  <h3 class="text-lg font-extrabold text-slate-900">
+                    COMPROVANTE DE PRÉ-INSCRIÇÃO
+                  </h3>
+                </div>
+                <span
+                  id="comp-protocolo"
+                  class="bg-green-100 text-green-900 font-mono font-bold px-3 py-1 rounded text-xs"
+                ></span>
+              </div>
+              <div
+                id="comp-detalhes"
+                class="space-y-2 text-sm text-slate-700"
+              ></div>
+              <div
+                class="mt-5 pt-3 border-t border-dashed border-slate-300 text-xs text-slate-500 flex justify-between"
+              >
+                <span>Apresentar ao coordenador do polo no 1º treino.</span>
+                <span id="comp-data"></span>
+              </div>
+            </div>
+
+            <div class="mt-4 flex flex-wrap justify-center gap-3 no-print">
+              <button
+                onclick="window.print()"
+                class="bg-slate-800 hover:bg-slate-900 text-white font-semibold px-4 py-2 rounded-lg text-sm"
+              >
+                <i class="fa-solid fa-print mr-1.5"></i> Imprimir / Salvar PDF
+              </button>
+              <a
+                id="btn-whats-atleta"
+                href="#"
+                target="_blank"
+                class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-lg text-sm"
+              >
+                <i class="fa-brands fa-whatsapp mr-1.5"></i> Enviar para
+                Coordenação via WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA 3: TORNEIOS & FICHA DE EQUIPE -->
+      <section id="sec-torneios" class="hidden space-y-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Calendário de Torneios Comunitários -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
+          >
+            <div class="bg-acre text-white px-5 py-4">
+              <h2 class="font-bold text-base">
+                <i class="fa-solid fa-calendar-days mr-2"></i>Calendário de
+                Competições Comunitárias 2027
+              </h2>
+            </div>
+            <div class="p-5 divide-y divide-slate-100">
+              <div class="py-3 first:pt-0">
+                <div class="flex justify-between items-start">
+                  <span
+                    class="bg-green-100 text-green-800 text-xs font-bold px-2.5 py-0.5 rounded"
+                    >Inscrições Abertas</span
+                  >
+                  <span class="text-xs text-slate-500 font-semibold"
+                    >Março / 2027</span
+                  >
+                </div>
+                <h3 class="font-bold text-slate-800 mt-1.5">
+                  Copa Bairro & Cidadania Sub-13 e Sub-15
+                </h3>
+                <p class="text-xs text-slate-600 mt-0.5">
+                  Local: Arena Recriança (Morada do Sol) • Taxa: Gratuita (1kg
+                  de alimento por atleta)
+                </p>
+              </div>
+
+              <div class="py-3">
+                <div class="flex justify-between items-start">
+                  <span
+                    class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-0.5 rounded"
+                    >Em Planejamento</span
+                  >
+                  <span class="text-xs text-slate-500 font-semibold"
+                    >Maio / 2027</span
+                  >
+                </div>
+                <h3 class="font-bold text-slate-800 mt-1.5">
+                  Torneio Integração Master 40+
+                </h3>
+                <p class="text-xs text-slate-600 mt-0.5">
+                  Local: Campo do Palheira / Botafogo • Equipes comunitárias de
+                  Rio Branco
+                </p>
+              </div>
+
+              <div class="py-3 last:pb-0">
+                <div class="flex justify-between items-start">
+                  <span
+                    class="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-0.5 rounded"
+                    >Previsto</span
+                  >
+                  <span class="text-xs text-slate-500 font-semibold"
+                    >Agosto / 2027</span
+                  >
+                </div>
+                <h3 class="font-bold text-slate-800 mt-1.5">
+                  Corrida Rústica da Juventude Acreana (5km)
+                </h3>
+                <p class="text-xs text-slate-600 mt-0.5">
+                  Largada: Horto Florestal • Categorias Juvenil e Adulto
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gerador de Ficha de Inscrição de Equipe -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
+          >
+            <div class="bg-slate-800 text-white px-5 py-4">
+              <h2 class="font-bold text-base">
+                <i class="fa-solid fa-users-line mr-2"></i>Gerador de Ficha de
+                Inscrição de Equipe
+              </h2>
+              <p class="text-xs text-slate-300 mt-0.5">
+                Monte a relação nominal do seu time e imprima a súmula pronta.
+              </p>
+            </div>
+            <div class="p-5 space-y-3">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <input
+                  type="text"
+                  id="time-nome"
+                  placeholder="Nome da Equipe (Ex: Amigos do Bairro)"
+                  class="border border-slate-300 rounded-lg px-3 py-2 text-sm"
+                />
+                <input
+                  type="text"
+                  id="time-bairro"
+                  placeholder="Bairro Representado"
+                  class="border border-slate-300 rounded-lg px-3 py-2 text-sm"
+                />
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <input
+                  type="text"
+                  id="time-tecnico"
+                  placeholder="Nome do Técnico / Responsável"
+                  class="border border-slate-300 rounded-lg px-3 py-2 text-sm"
+                />
+                <select
+                  id="time-torneio"
+                  class="border border-slate-300 rounded-lg px-3 py-2 text-sm"
+                >
+                  <option value="Copa Bairro & Cidadania Sub-13/15">
+                    Copa Bairro & Cidadania Sub-13/15
+                  </option>
+                  <option value="Torneio Integração Master 40+">
+                    Torneio Integração Master 40+
+                  </option>
+                  <option value="Festival Comunitário de Futsal">
+                    Festival Comunitário de Futsal
+                  </option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1"
+                  >Lista de Atletas (1 nome por linha)</label
+                >
+                <textarea
+                  id="time-atletas"
+                  rows="5"
+                  placeholder="1. Carlos Eduardo Lima&#10;2. Marcos Vinícius Souza&#10;3. Rafael Gomes..."
+                  class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
+                ></textarea>
+              </div>
+              <button
+                onclick="gerarFichaTime()"
+                class="w-full bg-acre hover:bg-acre-dark text-white font-bold py-2.5 rounded-lg text-sm transition"
+              >
+                <i class="fa-solid fa-file-lines mr-1.5"></i> Gerar Ficha
+                Oficial da Equipe
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visualização da Ficha de Equipe -->
+        <div
+          id="box-ficha-time"
+          class="hidden bg-white p-6 rounded-xl border-2 border-slate-800 max-w-3xl mx-auto"
+        >
+          <div id="conteudo-ficha-time"></div>
+          <div class="mt-4 text-right no-print">
+            <button
+              onclick="imprimirFichaTime()"
+              class="bg-slate-800 text-white px-4 py-2 rounded-lg text-sm font-semibold"
+            >
+              <i class="fa-solid fa-print mr-1"></i> Imprimir Ficha da Equipe
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-6 px-4 mt-12">
+      <div
+        class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3"
+      >
+        <p>
+          <strong class="text-white">Esporte & Cidadania Acre</strong> •
+          Iniciativa Comunitária de Utilidade Pública (2027)
+        </p>
+        <p>
+          Rio Branco - Acre • Esporte, Inclusão Social e Cidadania nos Bairros
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Base de dados inicial dos polos comunitários (fácil de editar)
+      const polosEsportivos = [
+        {
+          nome: "Arena Recriança",
+          bairro: "Morada do Sol",
+          endereco: "Conjunto Jardim São Francisco - Morada do Sol",
+          modalidade: "Futebol de Campo",
+          dias: "Terças, Quintas e Sábados • 08h e 16h",
+          faixa: "7 a 15 anos",
+          vagas: 45,
+          whatsapp: "5568999990001",
+        },
+        {
+          nome: "Núcleo Esportivo Tucumã",
+          bairro: "Tucumã",
+          endereco: "Quadra Poliesportiva Principal - Tucumã",
+          modalidade: "Futsal",
+          dias: "Segundas e Quartas • 15h às 17h30",
+          faixa: "8 a 16 anos",
+          vagas: 30,
+          whatsapp: "5568999990002",
+        },
+        {
+          nome: "Projeto Atletismo Horto",
+          bairro: "Vila Ivonete",
+          endereco: "Parque Horto Florestal - Vila Ivonete",
+          modalidade: "Atletismo",
+          dias: "Sábados e Domingos • 07h às 09h",
+          faixa: "10 a 17 anos",
+          vagas: 40,
+          whatsapp: "5568999990003",
+        },
+        {
+          nome: "Escolinha Campo do Botafogo",
+          bairro: "Ipase",
+          endereco: "Campo Comunitário do Botafogo",
+          modalidade: "Futebol de Campo",
+          dias: "Terças e Quintas • 16h às 18h",
+          faixa: "6 a 14 anos",
+          vagas: 35,
+          whatsapp: "5568999990004",
+        },
+        {
+          nome: "Vôlei Cidadão Segundo Distrito",
+          bairro: "Cidade Nova",
+          endereco: "Ginásio Comunitário Cidade Nova",
+          modalidade: "Vôlei",
+          dias: "Quartas e Sextas • 16h às 18h",
+          faixa: "11 a 17 anos",
+          vagas: 20,
+          whatsapp: "5568999990005",
+        },
+        {
+          nome: "Futsal Feminino & Base Ipase",
+          bairro: "Ipase",
+          endereco: "Quadra Coberta Ipase",
+          modalidade: "Futsal",
+          dias: "Sábados • 08h30 às 11h",
+          faixa: "9 a 17 anos",
+          vagas: 15,
+          whatsapp: "5568999990006",
+        },
+      ];
+
+      function renderizarPolos() {
+        const bairro = document.getElementById("filtro-bairro").value;
+        const modalidade = document.getElementById("filtro-modalidade").value;
+        const texto = document
+          .getElementById("filtro-texto")
+          .value.toLowerCase();
+        const container = document.getElementById("lista-polos");
+
+        const filtrados = polosEsportivos.filter((p) => {
+          const matchBairro = bairro === "TODOS" || p.bairro === bairro;
+          const matchMod =
+            modalidade === "TODAS" || p.modalidade === modalidade;
+          const matchTexto =
+            p.nome.toLowerCase().includes(texto) ||
+            p.endereco.toLowerCase().includes(texto) ||
+            p.dias.toLowerCase().includes(texto);
+          return matchBairro && matchMod && matchTexto;
+        });
+
+        if (filtrados.length === 0) {
+          container.innerHTML = `<div class="col-span-full bg-white p-8 rounded-xl text-center text-slate-500 border border-slate-200">Nenhum polo encontrado com os filtros selecionados.</div>`;
+          return;
+        }
+
+        container.innerHTML = filtrados
+          .map(
+            (p) => `
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 flex flex-col justify-between hover:border-green-600 transition">
+          <div>
+            <div class="flex justify-between items-start gap-2">
+              <span class="bg-green-100 text-green-800 text-xs font-bold px-2.5 py-1 rounded-md">${p.modalidade}</span>
+              <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">${p.vagas} vagas</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-800 mt-3">${p.nome}</h3>
+            <p class="text-xs text-slate-500 mt-1"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i> ${p.endereco}</p>
+            <div class="mt-4 space-y-1.5 text-xs text-slate-600 bg-slate-50 p-3 rounded-lg">
+              <p><i class="fa-regular fa-clock text-green-700 mr-1.5"></i> <strong>Horários:</strong> ${p.dias}</p>
+              <p><i class="fa-solid fa-child-reaching text-green-700 mr-1.5"></i> <strong>Público:</strong> ${p.faixa} (Gratuito)</p>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex gap-2">
+            <button onclick="preSelecionarPolo('${p.nome}', '${p.modalidade}')" class="flex-1 bg-acre hover:bg-acre-dark text-white text-xs font-bold py-2 rounded-lg transition">
+              Inscrever-se
+            </button>
+            <a href="https://wa.me/${p.whatsapp}?text=${encodeURIComponent("Olá! Vi o projeto " + p.nome + " no portal Esporte & Cidadania Acre e gostaria de informações sobre vagas.")}" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg text-xs flex items-center justify-center" title="Falar no WhatsApp">
+              <i class="fa-brands fa-whatsapp text-base"></i>
+            </a>
+          </div>
+        </div>
+      `,
+          )
+          .join("");
+      }
+
+      function mudarAba(aba) {
+        ["escolinhas", "inscricao", "torneios"].forEach((id) => {
+          document.getElementById("sec-" + id).classList.add("hidden");
+          const btn = document.getElementById("tab-" + id);
+          btn.classList.remove(
+            "border-yellow-400",
+            "text-yellow-300",
+            "font-bold",
+          );
+          btn.classList.add(
+            "border-transparent",
+            "text-green-100",
+            "font-semibold",
+          );
+        });
+
+        document.getElementById("sec-" + aba).classList.remove("hidden");
+        const ativo = document.getElementById("tab-" + aba);
+        ativo.classList.remove(
+          "border-transparent",
+          "text-green-100",
+          "font-semibold",
+        );
+        ativo.classList.add(
+          "border-yellow-400",
+          "text-yellow-300",
+          "font-bold",
+        );
+      }
+
+      function preSelecionarPolo(nomePolo, modalidade) {
+        mudarAba("inscricao");
+        const selectPolo = document.getElementById("atleta-polo");
+        for (let opt of selectPolo.options) {
+          if (opt.value.includes(nomePolo.split(" ")[0])) {
+            selectPolo.value = opt.value;
+            break;
+          }
+        }
+        document.getElementById("atleta-modalidade").value = modalidade;
+      }
+
+      function gerarComprovanteAtleta(e) {
+        e.preventDefault();
+        const nome = document.getElementById("atleta-nome").value;
+        const nasc = document
+          .getElementById("atleta-nascimento")
+          .value.split("-")
+          .reverse()
+          .join("/");
+        const polo = document.getElementById("atleta-polo").value;
+        const mod = document.getElementById("atleta-modalidade").value;
+        const resp = document.getElementById("resp-nome").value;
+        const whats = document.getElementById("resp-whats").value;
+        const escola = document.getElementById("atleta-escola").value;
+        const turno = document.getElementById("atleta-turno").value;
+
+        const protocolo = "ECA-" + Math.floor(100000 + Math.random() * 900000);
+        const hoje = new Date().toLocaleDateString("pt-BR");
+
+        document.getElementById("comp-protocolo").innerText = protocolo;
+        document.getElementById("comp-data").innerText = "Emitido em: " + hoje;
+        document.getElementById("comp-detalhes").innerHTML = `
+        <p><strong>Atleta:</strong> ${nome} (Nasc.: ${nasc})</p>
+        <p><strong>Polo Escolhido:</strong> ${polo}</p>
+        <p><strong>Modalidade:</strong> ${mod}</p>
+        <p><strong>Responsável:</strong> ${resp} • <strong>Tel.:</strong> ${whats}</p>
+        <p><strong>Escola:</strong> ${escola} (${turno})</p>
+      `;
+
+        const msgWhats = `*PRÉ-INSCRIÇÃO ESPORTE & CIDADANIA 2027*\nProtocolo: ${protocolo}\nAtleta: ${nome} (${nasc})\nPolo: ${polo} (${mod})\nResponsável: ${resp}\nEscola: ${escola}`;
+        document.getElementById("btn-whats-atleta").href =
+          `https://wa.me/5568999990000?text=${encodeURIComponent(msgWhats)}`;
+
+        document
+          .getElementById("resultado-comprovante")
+          .classList.remove("hidden");
+        document
+          .getElementById("resultado-comprovante")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      function gerarFichaTime() {
+        const time = document.getElementById("time-nome").value.trim();
+        const bairro = document.getElementById("time-bairro").value.trim();
+        const tecnico = document.getElementById("time-tecnico").value.trim();
+        const torneio = document.getElementById("time-torneio").value;
+        const atletas = document
+          .getElementById("time-atletas")
+          .value.trim()
+          .split("\n")
+          .filter((l) => l.trim() !== "");
+
+        if (!time || !tecnico || atletas.length === 0) {
+          alert(
+            "Preencha o nome da equipe, o responsável e pelo menos um atleta.",
+          );
+          return;
+        }
+
+        const linhasTabela = atletas
+          .map(
+            (atleta, i) => `
+        <tr class="border-b">
+          <td class="py-1.5 px-2 text-center font-bold">${i + 1}</td>
+          <td class="py-1.5 px-2">${atleta.replace(/^\d+[\.\-\)]\s*/, "")}</td>
+          <td class="py-1.5 px-2 text-slate-400">___________________</td>
+          <td class="py-1.5 px-2 text-slate-400">___________</td>
+        </tr>
+      `,
+          )
+          .join("");
+
+        document.getElementById("conteudo-ficha-time").innerHTML = `
+        <div id="area-impressao">
+          <div class="border-b-2 border-slate-800 pb-3 mb-4 flex justify-between items-center">
+            <div>
+              <p class="text-xs font-bold uppercase text-green-800">Esporte & Cidadania Acre • Competições Comunitárias 2027</p>
+              <h3 class="text-xl font-extrabold uppercase">Ficha Oficial de Inscrição de Equipe</h3>
+            </div>
+            <span class="text-xs font-mono border border-slate-400 px-2 py-1 rounded">Data: ${new Date().toLocaleDateString("pt-BR")}</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-sm mb-4 bg-slate-50 p-3 rounded border">
+            <p><strong>Competição:</strong> ${torneio}</p>
+            <p><strong>Equipe:</strong> ${time}</p>
+            <p><strong>Bairro:</strong> ${bairro || "Rio Branco - AC"}</p>
+            <p><strong>Técnico/Responsável:</strong> ${tecnico}</p>
+          </div>
+          <table class="w-full text-xs border border-slate-300">
+            <thead class="bg-slate-100 border-b border-slate-300">
+              <tr>
+                <th class="py-2 px-2 w-10">Nº</th>
+                <th class="py-2 px-2 text-left">Nome Completo do Atleta</th>
+                <th class="py-2 px-2 text-left w-36">RG / CPF</th>
+                <th class="py-2 px-2 text-left w-28">Data Nasc.</th>
+              </tr>
+            </thead>
+            <tbody>${linhasTabela}</tbody>
+          </table>
+          <div class="mt-8 pt-4 flex justify-between text-xs text-slate-600">
+            <div>_______________________________________<br>Assinatura do Responsável pela Equipe</div>
+            <div>_______________________________________<br>Visto da Organização</div>
+          </div>
+        </div>
+      `;
+
+        document.getElementById("box-ficha-time").classList.remove("hidden");
+        document
+          .getElementById("box-ficha-time")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      function imprimirFichaTime() {
+        window.print();
+      }
+
+      // Inicializa a lista ao carregar
+      renderizarPolos();
+    </script>
+  </body>
+</html>
